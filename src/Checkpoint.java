@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class Checkpoint {
@@ -14,7 +15,7 @@ public class Checkpoint {
 		 * 
 		 * Use the method provided to get an ArrayList of CarMPGEntry objects. Convert the ArrayList into a Stream.
 		 * Using streams, perform the following:
-		 * 
+		 *
 		 * 1. Print the entire list.
 		 * 
 		 * 
@@ -29,6 +30,27 @@ public class Checkpoint {
 		 * 
 		 * 5. Print only the cars with "toyota" in the name.
 		 */
+		ArrayList<CarMPGEntry> carList = readCarMPGEntryDataFromFile();
+		Stream<CarMPGEntry> carListStream = carList.stream();
+		carListStream.forEach((c)->{System.out.println(c.mpg+"\t"+c.cylinders+"\t"+c.displacement+"\t"+c.horsePower+"\t"+c.weight+"\t"+c.acceleration+"\t"+c.modelYear+"\t"+c.origin+"\t"+c.carName);});
+		System.out.println("\n");
+		Stream<CarMPGEntry> carListMPG = carList.stream();
+		carListMPG.forEach((c)->{System.out.println(c.mpg);});
+		System.out.println("\n");
+		Stream<CarMPGEntry> carListNames = carList.stream();
+		carListNames.map(c->c.carName).sorted().forEach((c)->{System.out.println(c);});
+		System.out.println("\n");
+		Stream<CarMPGEntry> carListCylinder = carList.stream();
+		carListCylinder.forEach((c)->{if(c.cylinders!=8) {
+			System.out.println(c.mpg+"\t"+c.cylinders+"\t"+c.displacement+"\t"+c.horsePower+"\t"+c.weight+"\t"+c.acceleration+"\t"+c.modelYear+"\t"+c.origin+"\t"+c.carName);
+		}});
+		System.out.println("\n");
+		Stream<CarMPGEntry> carListNamesToyota = carList.stream();
+		carListNamesToyota.forEach((c)->{if(c.carName.contains("toyota")) {
+			System.out.println(c.mpg+"\t"+c.cylinders+"\t"+c.displacement+"\t"+c.horsePower+"\t"+c.weight+"\t"+c.acceleration+"\t"+c.modelYear+"\t"+c.origin+"\t"+c.carName);
+		}});
+		
+		
 		
 		
 	}
